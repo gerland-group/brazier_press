@@ -26,7 +26,7 @@ where the summation runs over all the triangles of the right (or left) lid and $
 The term $E_{CM}$ is used to enforce the alignment of the two lids in the plane normal to the long axis of the tube
 
 $$
-E_{CM} = \frac{k_{CM}}{2} | \vec{R}_{CM,x}^r  - R_{CM,x}^r |^2  + \frac{k_{CM}}{2} | R_{CM,z}^l  - \vec{R}_{CM,z}^l |^2
+E_{CM} = \frac{k_{CM}}{2} | R_{CM,x}^r  - R_{CM,x}^r |^2  + \frac{k_{CM}}{2} | R_{CM,z}^l  - R_{CM,z}^l |^2
 $$
 
 where $\vec{R}_{{CM},x}^{l,r}$ is the center of mass of the left/right lid and $x,z$ indicates the Cartesian coordinate. We found that this potential has no influence in the mechanical and geometrical response. However, in its absence a single kink is formed anywhere along the distance of the tube.
