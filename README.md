@@ -47,7 +47,7 @@ make parallel
 ## Execution
 The simulation is launched by simply executing `./brazier` in the `brazier/bin` folder. The number of nodes to use in the parallel computations can be configured by exporting the variable `OMP_NUM_THREADS`, as `export OMP_NUM_THREADS = num threads to use`.
 
-Pressurisation proceeds in a step-wise fashion from $0$ to a target pressure $p$ atm, steps of $\Delta p$ provided by the user. Once the target pressurisation is reached, the bending of the tube starts in steps, for a total number of $N_\theta$ steps. There is no control on the particular angle aquired, since it will also depend on the parameter $k_\tau$. Thus, some experimentation is needed to reach the target curvature. This is a tradeoff between computational speed and number of data points for each curvature.
+Pressurisation proceeds in a step-wise fashion from $0$ to a target pressure $p$ atm, steps of $\Delta p$ provided by the user. Once the target pressurisation is reached, the bending of the tube starts. The bending is also stepwise, for a total number of $N_\theta$ steps between $\theta = 0$ and $\theta_{max}$. There is no control on the particular angle aquired, since it will also depend on the parameter $k_\tau$. Thus, some experimentation is needed to reach the target curvature. This is a tradeoff between computational speed and number of data points for each curvature.
 
 
 ### Input
@@ -55,18 +55,18 @@ The program requires as input the following files:
 
 - `init_coords.dat`: Array of $N\times 3$ with the $N$ vertices coordinates defining the surface in the relax configuration. The units of the input coordiantes coordinates are nm.
 - `mesh.dat`: Array of $T\times 3$ with the $T$ triangles defining the connectivity of the triangulated surface.
-- `params.conf`: This file contains the simulation parameters to use. The meaning of each parameter is indicated in commented blocks in the file.
+- `params.conf`: This file contains the simulation parameters to use. The meaning of each parameter is indicated in commented blocks in the file. The user can adjust the parameters $K_\tau$ and $K_{CM}$, as well as the $N_\theta$ and $\theta_{max}$
 
 
 #### Generation of cylinders
 
-A cylinder with lids having the approapiate configuration to be interpreted by the simulation code, can be generated with the included Python code included in the folder `gencylinder`. The code is executed as
+A cylinder with lids having the approapiate configuration to be interpreted by the simulation code, can be generated with the included Python code included in the folder `gencylinder`. The code is executed as  $N_\theta$ and
 ```
 python3 rodgen radius length spacing type_of_cylinder
 ```
 where radius and length are the target radius and length, and spacing is the typical bond length of the sytsem, i.e., $r_{ij}^0$. Type of cylinder can take the values `circumf` or `long` depending on the desired orientation of the mesh. In the article, we mostly used circumferentially aligned cylinders. The execution of the script generates the files `init_coords.dat` and `mesh.dat` located in the `outfiles` folder. These files contain the position of the vertices and the ensuing triangulation and are ready to be used with `brazier`. A log file is also generated as a summary of the properties of the generated mesh.
 
-The codes to generate the cylinders with lids are dependent on Python 3 and on the packages numpy and sys. The generation of the mesh relies on the Advancing Front Surface Reconstruction algorithm from the CGAL library (see the [meshgen](https://github.com/pastranacl/meshgen) repo).
+The codes to generate the cylinders with lids are dependent on Python 3 and on the packages numpy and sys. The generation of the mesh relies on the Advancing Front Surface Reconstruction algorithm from the CGAL library (see the [meshgen](https://github.com/pastranacl/meshgen) repository).
 
 
 
