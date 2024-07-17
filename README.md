@@ -26,7 +26,7 @@ where the summation runs over all the triangles of the right (or left) lid and $
 The term $E_{CM}$ is used to enforce the alignment of the two lids in the plane normal to the long axis of the tube
 
 $$
-E_{CM} = \frac{k_{CM}}{2} | \vec{R}_{{CM},x}^{r}  - \vec{R}_{{CM},x}^r |^2  + \frac{k_{CM}}{2} | \vec{R}_{{CM},z}^{l}  - \vec{R}_{{CM},z}^{l} |^2
+E_{CM} = \frac{k_{CM}}{2} | R_{CM,x}^r  - R_{CM,x}^r |^2  + \frac{k_{CM}}{2} | R_{CM,z}^l  - \vec{R}_{CM,z}^l |^2
 $$
 
 where $\vec{R}_{{CM},x}^{l,r}$ is the center of mass of the left/right lid and $x,z$ indicates the Cartesian coordinate. We found that this potential has no influence in the mechanical and geometrical response. However, in its absence a single kink is formed anywhere along the distance of the tube.
@@ -45,7 +45,7 @@ make parallel
  This will generate the compiled code `brazier` in the `bin` folder. The `parallel` tag activates the OpenMP compatible compilation.
 
 ## Execution
-The simulation is launched by simply executing `./brazier` in the `bin` folder. The number of nodes to use in the parallel computations can be configured by exporting the variable `OMP_NUM_THREADS`, as `export OMP_NUM_THREADS = num threads to use`.
+The simulation is launched by simply executing `./brazier` in the `brazier/bin` folder. The number of nodes to use in the parallel computations can be configured by exporting the variable `OMP_NUM_THREADS`, as `export OMP_NUM_THREADS = num threads to use`.
 
 Pressurisation proceeds in a step-wise fashion from $0$ to a target pressure $p$ atm, steps of $\Delta p$ provided by the user. Once the target pressurisation is reached, the bending of the tube starts in steps, for a total number of $N_\theta$ steps. There is no control on the particular angle aquired, since it will also depend on the parameter $k_\tau$. Thus, some experimentation is needed to reach the target curvature. This is a tradeoff between computational speed and number of data points for each curvature.
 
@@ -81,3 +81,8 @@ The following output files are generated after execution of `brazier`:
 - `summary/bent_angles.dat`: Imposed bent angles for each step.
 - `summary/output.dat`: Summary of mechanical, geometrical, and simulation parameters employed.
 - `lids/*.dat`: The files in this folder indicate the edges, triangles, and vertices that belong to the right or left lid of the tube.
+
+
+
+
+For any question, comment or problem, please write me to ceslopast_AT_gmail_com
