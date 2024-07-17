@@ -9,29 +9,31 @@ This software was used in the manuscript "Mechanics and wrinkling patterns of pr
 The surface is described using a discrete bead and spring model. The total energy of the system is given by $E_{T} = E_{int} + E_{ext}$. The internal energy of the system is that of the tube and is given by:
 
 $$
-E_{int} = \frac{k_s}{2}\sum_{\langle i,j\rangle} (r_{ij} - r_{ij}^0)^2 +  k_b\sum_{\langle \alpha,\beta\rangle}(1 - \hat{n_\alpha}\cdot\hat{n}_\beta) - pV
+E_{int} = \frac{k_s}{2}\sum_{\langle i,j\rangle} (r_{ij} - r_{ij}^0)^2 +  k_b\sum_{\langle \alpha,\beta\rangle}(1 - \hat{n}_\alpha\cdot\hat{n}_\beta) - pV
 $$
 
 where the first sum runs over all pairs of connected notes $i,j$ constituting an edge of the mesh and $r_{ij} = |r_i - r_j|$; and the second sum is over pair of triangles $\alpha,\beta$ sharing an edge, $\hat{n}$ are their respective normal vectors and $k_b$ is a bending stiffness. For a detailed description of the relation between the discrete $k_x$ and the continum variables (Young modulus, thickness and Poisson ratio) see the original manuscript as well as the seminal work by Soung H.S. and Nelson D.R. \([Phys. Rev. A 38,1005--1018, 1988](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.38.1005)\).
 
 
 The external potential is $E_{ext} = E_{\tau} + E_{CM}$. The component $E_\tau$ is included to induce the bending of the tube and is given by:
+
 $$
-E_\tau = k_{\tau}\sum_{ i\in\substack{\text{left}\\\text{lid}} } (1 - \mathbf{\hat{n}}_i\cdot\mathbf{\hat{n}}^l_0) + k_{\tau}\sum_{ i\in\substack{\text{right}\\\text{lid}} } (1 - \mathbf{\hat{n}}_i\cdot\mathbf{\hat{n}}_0^r)
+E_\tau = k_{\tau}\sum_{ i\in right lids } (1 - \hat{n}_i\cdot\hat{n}^l_0) + k_{\tau}\sum_{ i \in right lid } (1 - \hat{n}_i\cdot\hat{n}_0^r)
 $$
+
 where the summation runs over all the triangles of the right (or left) lid and $\mathbf{\hat{n}}_i$ is the normal vector of the triangle $i$. The term $\mathbf{\hat{n}}^{l,r}_0$ is the preferred orientation vector for the right or left lid, $r$ and $l$ respectively.
-\par
-The term ${E}_{CM}$ is used to enforce the alignment of the two lids in the plane normal to the long axis of the tube
+
+The term $E_{CM}$ is used to enforce the alignment of the two lids in the plane normal to the long axis of the tube
+
 $$
-E_{CM} = \frac{k_{CM}}{2}\norm{\mathbf{R}_{{CM},x}^l  - \mathbf{R}_{{CM},x}^r}^2+ \frac{k_{CM}}{2}\norm{\mathbf{R}_{{CM},z}^l  - \mathbf{R}_{{CM},z}^r}^2,
+E_{CM} = \frac{k_{CM}}{2} |{\vec{R}_{{CM},x}^l  - \vec{R}_{{CM},x}^r|^2+ \frac{k_{CM}}{2} |\vec{R}_{{CM},z}^l  - \vec{R}_{{CM},z}^r|^2,
 $$
-where $\mathbf{R}_{{CM},x}^{l,r}$ is the center of mass of the left/right lid and $x,z$ indicates the Cartesian coordinate. We found that this potential has no influence in the mechanical and geometrical response. However, in its absence a single kink is formed anywhere along the distance of the tube.
+
+where $\vec{R}_{{CM},x}^{l,r}$ is the center of mass of the left/right lid and $x,z$ indicates the Cartesian coordinate. We found that this potential has no influence in the mechanical and geometrical response. However, in its absence a single kink is formed anywhere along the distance of the tube.
 \par
-The approach described resembles the action of \emph{virtual hands} to induce bending. The force exerted on the lids is adjusted with the constant $k_{\tau}$, given by $k_\tau := K_\tau k_{s}l_0^2$, where $l_0$ is the average bond length of the mesh. $K_\tau$ is a free parameter determined empirically to achieve the target curvatures of the tube. Similarly, $k_{CM} := k_sK_{CM}$. Notably, this procedure to bend the tube does not impose any constraint along the axial direction. The routine to bend the tube is as follows. The simulations start by first pressurizing the tube to the target pressure $p$ by progressively increasing the pressure in small steps from $p=0$. Next, to induce the bending of the tube, the preferred orientation vectors of the lids $\mathbf{\hat{n}}^{l,r}_0$ are tilted in a step-wise fashion. For instance, $\mathbf{\hat{n}}^r_0 =  0\mathbf{\hat{i}} - \sin(s\delta\theta)\mathbf{\hat{j}} + \cos(s\delta\theta)\mathbf{\hat{k}}$, where $s$ is the step number and $\delta\theta$ is a defined change in the angular position.  Each step, pressurization and bending, is followed by energy minimization.
+The approach described resembles the action of virtual hands to induce bending. The force exerted on the lids is adjusted with the constant $k_{\tau}$, given by $k_\tau := K_\tau k_{s}l_0^2$, where $l_0$ is the average bond length of the mesh. $K_\tau$ is a free parameter determined empirically to achieve the target curvatures of the tube. Similarly, $k_{CM} := k_sK_{CM}$. Notably, this procedure to bend the tube does not impose any constraint along the axial direction. The routine to bend the tube is as follows. The simulations start by first pressurizing the tube to the target pressure $p$ by progressively increasing the pressure in small steps from $p=0$. Next, to induce the bending of the tube, the preferred orientation vectors of the lids $\hat{n}^{l,r}_0$ are tilted in a step-wise fashion. For instance, $\hat{n}^r_0 =  0\hat{i} - \sin(s\delta\theta)\hat{j} + \cos(s\delta\theta)\hat{k}$, where $s$ is the step number and $\delta\theta$ is a defined change in the angular position.
 
-
-
-A custom non-linear conjugate gradient algorithm is used to find the minimal energy configuration.
+Each step, pressurization and bending, is followed by energy minimization. A custom non-linear conjugate gradient algorithm is used to find the minimal energy configuration.
 
 
 ## Compilation
@@ -69,11 +71,13 @@ The codes to generate the cylinders with lids are dependent on Python 3 and on t
 
 
 ### Output
-The following output files are generated after execution of `shape`:
+The following output files are generated after execution of `brazier`:
 
-- `./minim_coords.dat`:  Coordinate at the target pressure.
 - `./press/X_press.dat`: Coordinates for each step of pressurization.
+- `./brazier/X_brazier.dat`: Coordinates for each step of bending at the given pressure. These are the main files to analyse.
+- `./summary/minim_coords_press.dat`:  Coordinate at the target pressure prior to bending.
+- `./summary/minim_coords_press.dat`:  Coordinate at the target pressure at the end of the bending routine.
 - `./summary/pressures.dat`: Pressures in each step.
-- `./summary/output.dat`: Summaary of mechanical and mesh parameters employed.
-- `./helix/main_helix_vertexes.dat`: Indices of the verticies defining the main helix (layer zero)
-- `./helix/helix_vertexes.dat`: Every index involved in the reinforced area
+- `./summary/bent_angles.dat`: Imposed bent angles for each step.
+- `./summary/output.dat`: Summary of mechanical, geometrical, and simulation parameters employed.
+- `./lids/*.dat`: The files in this folder indicate the edges, triangles, and vertices that belong to the right or left lid of the tube.
