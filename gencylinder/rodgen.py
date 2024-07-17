@@ -3,6 +3,7 @@ import sys
 
 
 
+
 def save_log(tube_props):
     """
         Save a log file for the tube with the properties 
@@ -324,42 +325,12 @@ if __name__ == "__main__":
         sys.exit(0)
         
         
-    
-    
     np.savetxt('./outfiles/init_coords.dat', rxyz,fmt='%.10f', delimiter='\t')
     save_log(tube_props)
     
-    """
-    import matplotlib.pyplot as plt
-    fig = plt.figure()
-    ax = plt.axes(projection='3d')
-    ax.scatter3D(rxyz[:,0], rxyz[:,1], rxyz[:,2])
-    plt.show()
-    """
-    
 
-    from meshgen import gentrimesh, plot_tri
+    from meshes.meshgen import gentrimesh, plot_tri
     tri, n_tri = gentrimesh(rxyz)
     np.savetxt('./outfiles/mesh.dat', tri, fmt='%d', delimiter='\t')
     plot_tri(rxyz, tri)
-    
-    """
-    # This was used to test the correct geometry od the bonds
-    for t in range(0, n_tri):
-        v1 = tri[t,0]
-        v2 = tri[t,1]
-        v3 = tri[t,2]
-        l1 = np.linalg.norm(rxyz[v1,:] - rxyz[v2,:])
-        l2 = np.linalg.norm(rxyz[v2,:] - rxyz[v3,:])
-        l3 = np.linalg.norm(rxyz[v3,:] - rxyz[v1,:])
-        
-        print(rxyz[v1,:])
-        print(rxyz[v2,:])
-        print(rxyz[v3,:])
-        print("  ")
-        print(l1)
-        print(l2)
-        print(l3)
-        print("===============")
-        
-    """
+
