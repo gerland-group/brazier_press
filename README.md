@@ -18,7 +18,7 @@ where the first sum runs over all pairs of connected notes $i,j$ constituting an
 The external potential is $E_{ext} = E_{\tau} + E_{CM}$. The component $E_\tau$ is included to induce the bending of the tube and is given by:
 
 $$
-E_\tau = k_{\tau}\sum_{ i\in \text{ right lids} } (1 - \hat{n}_i\cdot\hat{n}^l_0) + k_{\tau}\sum_{ i \in \text{ right lid} } (1 - \hat{n}_i\cdot\hat{n}_0^r)
+E_\tau = k_{\tau}\sum_{ i\in \text{ right lids}} (1 - \hat{n_i} \cdot\hat{n}^l_0) + k_{\tau}\sum_{ i \in \text{ right lid} } (1 - \hat{n_i} \cdot\hat{n}_0^r)
 $$
 
 where the summation runs over all the triangles of the right (or left) lid and $\hat{n}_i$ is the normal vector of the triangle $i$. The term $\hat{n}^{l,r}_0$ is the preferred orientation vector for the right or left lid, $r$ and $l$ respectively.
