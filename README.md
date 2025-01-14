@@ -2,7 +2,8 @@
 
 Cesar L. Pastrana, 2023 (c)
 
-This software was used in the manuscript "Mechanics and wrinkling patterns of pressurized bent tubes" by Pastrana C.L, Qiu L., Hutchinson J.W., Amir A. and Gerland U. [Phys. Rev. E. 111(1): L013502](https://link.aps.org/doi/10.1103/PhysRevE.111.L013502), 2025. Preprint available: [arXiv](https://arxiv.org/abs/2402.17033).
+This software was used in the manuscript "Mechanics and wrinkling patterns of pressurized bent tubes" by Pastrana C.L, Qiu L., Hutchinson J.W., Amir A. and Gerland U. [Phys. Rev. E. 111(1): L013502](https://link.aps.org/doi/10.1103/PhysRevE.111.L013502), 2025.
+Preprint available on [arXiv](https://arxiv.org/abs/2402.17033).
 
 ## Description
 The surface is described using a discrete bead and spring model. The total energy of the system is given by $E_{T} = E_{int} + E_{ext}$. The internal energy of the system is that of the tube and is given by:
